@@ -20,7 +20,7 @@ const icons = {
     [WINDY]: "windy"
 };
 
-const sizeIcon = "4x";
+//const sizeIcon = "4x";
 
 const getWeatherIcon = weatherState => {
     const icon = icons[weatherState];

@@ -8,23 +8,6 @@ import { api_weather } from './../../constants/api_url';
 import WeatherData from './WeatherData';
 import './style.css';
 
-import {
-    CLOUD,
-    CLOUDY,
-    SUN,
-    RAIN,
-    SNOW,
-    WINDY
-} from '../../constants/weather';
-
-
-
-const data = {
-    temperature: 2,
-    weatherState: SNOW,
-    humidity: 2,
-    wind: '10 m/s'
-}
 
 class WeatherLocation extends Component {
 
@@ -33,9 +16,30 @@ class WeatherLocation extends Component {
         //this.state only works in the constructor
         this.state = {
             city: 'Buenos Aires',
-            data: data
-        }
+            data: null
+        };
+        console.log("constructor");
     }
+
+    componentDidMount() {
+        console.log("componentDidMount");
+        this.handleUpdateClick();
+    }
+
+    componentDidUpdate(prevProps, prevState) {
+        console.log("componentDidUpdate");
+    }
+
+    //no use it - UNSAFE
+    /*
+    componentWillMount() {
+        console.log("UNSAFE componentWillMount");
+    }
+    //no use it -  UNSAFE
+    componentWillUpdate(nextProps, nextState) {
+        console.log("UNSAFE componentWillUpdate");
+    }
+    */
 
     handleUpdateClick = () => {
 
@@ -54,12 +58,12 @@ class WeatherLocation extends Component {
 
     }
     render() {
+        console.log("render");
         const { city, data } = this.state;
         return (
             <div className="weatherLocationCont">
                 <Location city={city}></Location>
-                <WeatherData data={data}></WeatherData>
-                <button onClick={this.handleUpdateClick}>Update</button>
+                {data ? <WeatherData data={data}></WeatherData> : "Cargando"}
             </div>
         );
     }
